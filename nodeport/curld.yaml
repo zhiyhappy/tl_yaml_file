@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curld
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curld
+  template:
+    metadata:
+      labels:
+        app: curld
+    spec:
+      containers:
+      - name: curld
+        image: everpeace/curl-jq

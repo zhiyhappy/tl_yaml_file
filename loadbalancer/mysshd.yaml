@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysshd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysshd
+  template:
+    metadata:
+      labels:
+        app: mysshd
+    spec:
+      containers:
+      - name: mysshd
+        image: zyseu/sshd:v3.2
+        ports:
+        - containerPort: 22
+          name: sshd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysshd
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 22
+  selector:
+    app: mysshd
